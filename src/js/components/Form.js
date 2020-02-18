@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addArticle } from '../actions/index'
 
+/**
+ * maps the react props to redux dispatch
+ * @param {function} dispatch 
+ */
 function mapDispatchToProps(dispatch) {
     return {
         addArticle: article => dispatch(addArticle(article))
@@ -23,11 +27,7 @@ class ConnectedForm extends Component {
     handleSubmit(event) {
         event.preventDefault()
         const { title } = this.state
-        const forbiddenWords = ['spam', 'money']
-        const foundWord = forbiddenWords.filter(word => title.includes(word) )
-        if (foundWord) {
-            return this.props.titleForbidden();
-        }
+        // we can do this because of the connect()
         this.props.addArticle( {title} )
         this.setState( {title: ""} )
     }
@@ -49,7 +49,10 @@ class ConnectedForm extends Component {
         )
     }
 }
-
+ /**
+  * exposes the mapDispatchToProps dispatch to the ConnectedForm so we can use
+  * props and redux in the form
+  */
 const Form = connect(
     null, 
     mapDispatchToProps

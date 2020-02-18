@@ -39,6 +39,7 @@
     "singleQuote": true
   },
   "devDependencies": {
-    "react-redux": "^7.1.3"
+    "react-redux": "^7.1.3",
+    "redux-thunk": "^2.3.0"
   }
 }
