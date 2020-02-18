@@ -1,11 +1,12 @@
-import { ADD_ARTICLE } from '../constants/action-types'
+import { ADD_ARTICLE, DATA_LOADED } from '../constants/action-types'
 
 /**
  * The root reducer is responsible for delegation of signals from the window obj
  */
 
 const initialState = {
-    articles: []
+    articles: [],
+    remoteArticles: []
 }
 
 /**
@@ -14,10 +15,14 @@ const initialState = {
  * @param {Object} action 
  */
 function rootReducer(state = initialState, action) {
-    if(action.type === ADD_ARTICLE) {
-        return {...state, articles: state.articles.concat(action.payload) }
+    switch(action.type){
+        case ADD_ARTICLE:
+            return { ...state, articles: state.articles.concat(action.payload) }
+        case DATA_LOADED:
+            return { ...state, remoteArticles: state.remoteArticles.concat(action.payload) }
+        default:
+            return state
     }
-    return state
 }
 
 
