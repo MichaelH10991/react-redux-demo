@@ -1,12 +1,24 @@
-import React from "react";
-import { render } from "react-dom";
-import { Provider } from "react-redux";
-import store from "./js/store/index";
-import App from "./js/components";
+import React from 'react';
+import './App.css';
+import App from "./js/components/App";
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
+  );
+}
 
-render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
-);
+export default App;
