@@ -4,14 +4,16 @@ import { connect } from 'react-redux'
 const ConnectedList = ({ articles }) => (
     <ul>
         {articles.map(el => (
-            <li key={el.id}>{el.title}</li>
+            <li key={el.id}>
+                {el.id}: {el.title}
+            </li>
         ))}
     </ul>
 )
 
 /**
  * The List component receives the prop articles which is a copy of the articles array we saw in the Redux state. It comes from the reducer
- * @param {*} state 
+ * @param {*} state
  */
 
 const mapStateToProps = state => {

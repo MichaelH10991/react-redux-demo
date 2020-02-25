@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addArticle } from '../actions/index'
+import { uuid } from 'uuidv4'
 
 class ConnectedForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            title: ""
+            title: '',
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -18,14 +19,16 @@ class ConnectedForm extends Component {
     handleSubmit(event) {
         event.preventDefault()
         const { title } = this.state
+        const id = uuid()
         /**
          * we can do this because of the connect() method which maps react props obj to redux store and actions.
          * connect() turns this.props.addArticle() into dispatch(addArticle(article))
-         * */ 
-        this.props.addArticle( {title} )
-        this.setState( {title: ""} )
+         * */
+
+        this.props.addArticle({ id, title })
+        this.setState({ id: '', title: '' })
     }
-    render(){
+    render() {
         const { title } = this.state
         return (
             <form onSubmit={this.handleSubmit}>
@@ -46,21 +49,18 @@ class ConnectedForm extends Component {
 
 /**
  * maps the react props to redux dispatch
- * @param {function} dispatch 
+ * @param {function} dispatch
  */
 function mapDispatchToProps(dispatch) {
     return {
-        addArticle: article => dispatch(addArticle(article))
+        addArticle: article => dispatch(addArticle(article)),
     }
 }
 
- /**
-  * exposes the mapDispatchToProps dispatch to the ConnectedForm so we can use
-  * props and redux in the form.
-  */
-const Form = connect(
-    null, 
-    mapDispatchToProps
-)(ConnectedForm)
+/**
+ * exposes the mapDispatchToProps dispatch to the ConnectedForm so we can use
+ * props and redux in the form.
+ */
+const Form = connect(null, mapDispatchToProps)(ConnectedForm)
 
 export default Form
