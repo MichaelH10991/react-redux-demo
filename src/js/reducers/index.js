@@ -5,7 +5,6 @@ import {
     API_ERRORED,
     DELETE_ARTICLE,
 } from '../constants/action-types'
-
 /**
  * The root reducer is responsible for delegation of signals from the window obj
  *
@@ -26,6 +25,7 @@ const initialState = {
  * @param {Object} action
  */
 function rootReducer(state = initialState, action) {
+    // this method seems jank
     const newState = { ...state }
     switch (action.type) {
         case ADD_ARTICLE:
@@ -44,19 +44,21 @@ function rootReducer(state = initialState, action) {
             })
             return newState
         case DATA_LOADED:
-            return {
-                ...state,
-                remoteArticles: state.remoteArticles.concat(action.payload),
-            }
+            newState.remoteArticles = state.remoteArticles.concat(
+                action.payload
+            )
+            return newState
         case API_ERRORED:
-            return { ...state, error: state.errors.concat(action.payload) }
+            newState.error = state.errors.concat(action.payload)
+            return newState
         case DELETE_ARTICLE:
             return {
                 ...state,
                 articles: state.articles.filter(
-                    article => article.id !== action.payload.updateId
+                    article => article.id !== action.payload.deleteId
                 ),
             }
+
         default:
             return state
     }

@@ -3,25 +3,23 @@ import List from './List'
 import Form from './Form'
 import Posts from './Posts'
 import Update from './Update'
+import Counter from './Counter'
+import DashboardMenu from './Dashboard'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 const App = () => (
     <>
-        <div>
-            <h2>Articles</h2>
-            <List />
-        </div>
-        <div>
-            <h2>Add a new Article</h2>
-            <Form />
-        </div>
-        <div>
-            <h2>Update Article</h2>
-            <Update />
-        </div>
-        <div>
-            <h2>API Posts</h2>
-            <Posts />
-        </div>
+        <h2>Dashboard Menu</h2>
+
+        <Router>
+            <DashboardMenu />
+            <Switch>
+                <Route path="/todos" component={List} />
+                <Route path="/addNewTodo" component={Form} />
+                <Route path="/updateTodos" component={Update} />
+                <Route path="/posts" component={Posts} />
+            </Switch>
+        </Router>
     </>
 )
 

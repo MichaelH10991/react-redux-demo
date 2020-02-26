@@ -8,15 +8,21 @@ class ConnectedUpdateForm extends Component {
         this.state = {
             title: '',
             updateId: '',
+            deleteId: '',
         }
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleUpdate = this.handleUpdate.bind(this)
         this.handleDelete = this.handleDelete.bind(this)
     }
     handleInputChange(event) {
-        return event.target.id === 'title'
-            ? this.setState({ title: event.target.value })
-            : this.setState({ updateId: event.target.value })
+        const { id, value } = event.target
+        if (id === 'title') {
+            this.setState({ title: value })
+        } else if (id === 'updateId') {
+            this.setState({ updateId: value })
+        } else if (id === 'deleteId') {
+            this.setState({ deleteId: value })
+        }
     }
     handleUpdate(event) {
         event.preventDefault()
@@ -26,12 +32,12 @@ class ConnectedUpdateForm extends Component {
     }
     handleDelete(event) {
         event.preventDefault()
-        const { updateId } = this.state
-        this.props.deleteArticle({ updateId })
-        this.setState({ updateId: '' })
+        const { deleteId } = this.state
+        this.props.deleteArticle({ deleteId })
+        this.setState({ deleteId: '' })
     }
     render() {
-        const { title, updateId } = this.state
+        const { title, updateId, deleteId } = this.state
         return (
             <>
                 <form onSubmit={this.handleUpdate}>
@@ -63,8 +69,8 @@ class ConnectedUpdateForm extends Component {
                         <label htmlFor="title">id</label>
                         <input
                             type="text"
-                            id="title"
-                            value={title}
+                            id="deleteId"
+                            value={deleteId}
                             onChange={this.handleInputChange}
                         />
                     </div>
