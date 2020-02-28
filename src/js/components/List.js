@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 const ConnectedList = ({ articles }) => (
     <ul>
+        {articles.length === 0 ? <p>No Todos</p> : null}
         {articles.map(el => (
             <li key={el.id}>
                 {el.id}: {el.title}

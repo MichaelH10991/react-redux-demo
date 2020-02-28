@@ -1,24 +1,26 @@
-import React from 'react';
-import './App.css';
-import App from "./js/components/App";
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import React from 'react'
+import List from './js/components/List'
+import Form from './js/components/Form'
+import Posts from './js/components/Posts'
+import Update from './js/components/Update'
+import Counter from './js/components/Counter'
+import DashboardMenu from './js/components/DashboardMenu'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-export default App;
+const App = () => (
+    <>
+        <h2>Dashboard Menu</h2>
+        <Router>
+            <DashboardMenu />
+            <Switch>
+                <Route path="/todos" component={List} />
+                <Route path="/addNewTodo" component={Form} />
+                <Route path="/updateTodos" component={Update} />
+                <Route path="/posts" component={Posts} />
+            </Switch>
+        </Router>
+        <Counter />
+    </>
+)
+
+export default App

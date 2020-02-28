@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-function Counter() {
+import { connect } from 'react-redux'
+
+function ConnectedCounter({ articles }) {
     /**
      * React hooks are named because they allow you to
      * “hook into” React state and lifecycle features
@@ -14,7 +16,11 @@ function Counter() {
             <p>you clicked {count} times</p>
             <button onClick={() => setCount(count + 1)}>Click Me!</button>
             <p>Your favourite fruit is {fruit}</p>
-            <input />
+            {articles.length === 1 ? (
+                <p>You have {articles.length} todo</p>
+            ) : (
+                <p>You have {articles.length} todos</p>
+            )}
         </div>
     )
 }
@@ -25,5 +31,11 @@ const COUNTER_STYLE = {
     flexDirection: 'column',
     width: '100%',
 }
+
+const mapStateToProps = state => {
+    return { articles: state.articles }
+}
+
+const Counter = connect(mapStateToProps)(ConnectedCounter)
 
 export default Counter
