@@ -1,14 +1,4 @@
 export default {
-    main: {
-        title: 'All',
-        url: '/',
-        filters: [{ field: 'thing', predicate: 'equals', value: 'persons' }],
-        columnIds: ['thing', 'thing1'],
-    },
-    todos: {
-        title: 'Todos',
-        url: '/todos',
-    },
     newTodo: {
         title: 'New Todo',
         url: '/addNewTodo',

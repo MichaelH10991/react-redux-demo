@@ -13,12 +13,12 @@ const App = () => (
         <Router>
             <DashboardMenu />
             <Switch>
-                <Route path="/todos" component={List} />
                 <Route path="/addNewTodo" component={Form} />
                 <Route path="/updateTodos" component={Update} />
                 <Route path="/posts" component={Posts} />
             </Switch>
         </Router>
+        <List />
         <Counter />
     </>
 )
